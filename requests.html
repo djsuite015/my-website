@@ -1,50 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>DJ Suite Community Board</title>
+<meta charset="UTF-8">
+<title>DJ Suite Requests</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="style.css">
 
-<!-- Cusdis Styles -->
-<link rel="stylesheet" href="https://cusdis.com/js/cusdis.css" />
-<link rel="stylesheet" href="https://unpkg.com/cusdis/dist/style.css">
 </head>
 
 <body>
 
 <header>
-<h1>DJ SUITE COMMUNITY BOARD</h1>
+<h1>DJ SUITE REQUEST/COMMENT BOARD</h1>
 
 <nav>
 <a href="index.html">Home</a>
 <a href="music.html">Music</a>
 <a href="mixtapes.html">Mixtapes</a>
-<a href="about.html">About DJ Suite</a>
 <a href="requests.html">Requests</a>
+<a href="about.html">About DJ Suite</a>
 </nav>
 
 </header>
 
 <section>
 
-<h2>Request New Mashups & Leave Comments</h2>
+<h2>Request Mashups & Leave Comments</h2>
+<p>Drop your remix ideas below 🔥</p>
 
-<p>Drop your ideas below. Heat only 🔥</p>
-
-<div id="cusdis_thread"
-  data-host="https://cusdis.com"
-  data-app-id="Yc74c7fc4-f12d-4b05-ba24-b9e311cd6d00"
-  data-page-id="requests"
-  data-page-url="https://djsuite015.github.io/my-website/requests.html"
-  data-page-title="DJ Suite Requests">
-</div>
+<!-- COMMENT BOX -->
+<div class="commentbox"></div>
 
 </section>
 
-<!-- Cusdis Script -->
-<script async src="https://unpkg.com/cusdis/dist/cusdis.es.js"></script>
+<!-- CommentBox Script -->
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
 
+<script>
+commentBox('5646243388719104-proj');
+</script>
 
 </body>
 </html>
