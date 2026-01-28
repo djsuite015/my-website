@@ -62,3 +62,36 @@ footer {
   text-align: center;
   font-size: 14px;
 }
+
+/* 3 Column Mixtape Grid */
+
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.track-item {
+  background: rgba(0,0,0,0.6);
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.track-item audio {
+  width: 100%;
+}
+
+/* Mobile responsive */
+@media (max-width: 900px) {
+  .track-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .track-grid {
+    grid-template-columns: 1fr;
+  }
+}
