@@ -1,43 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<title>DJ Suite Requests</title>
+<title>DJ Suite Requests Board</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="style.css">
+
+<style>
+
+/* Request Board Styling */
+
+.request-box {
+  max-width: 700px;
+  margin: 30px auto;
+  background: rgba(0,0,0,0.7);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  resize: none;
+  font-size: 16px;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  padding: 10px 18px;
+  background: #ff004c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  opacity: 0.8;
+}
+
+.comment-feed {
+  max-width: 700px;
+  margin: 20px auto;
+}
+
+.comment-item {
+  background: rgba(0,0,0,0.6);
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.comment-date {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 5px;
+}
+
+</style>
 
 </head>
 
 <body>
 
 <header>
-<h1>DJ SUITE REQUEST/COMMENT BOARD</h1>
+<h1>DJ SUITE REQUEST BOARD</h1>
 
 <nav>
 <a href="index.html">Home</a>
-<a href="music.html">House Mixes</a>
-<a href="mixtapes.html">Hip Hop Mixtapes</a>
-<a href="about.html">About DJ Suite</a>
+<a href="music.html">Music</a>
+<a href="mixtapes.html">Mixtapes</a>
+<a href="requests.html">Requests</a>
 </nav>
 
 </header>
 
-<section class="highlights">
+<section class="request-box">
 
-<h2>Request Mashups & Leave Comments</h2>
-<p>Drop your remix ideas below 🔥</p>
+<h2>Drop Your Mix Requests & Comments</h2>
 
-<!-- COMMENT BOX -->
-<div class="commentbox"></div>
+<textarea id="commentInput" placeholder="Request a mashup, remix idea, or leave feedback..."></textarea>
+
+<button class="submit-btn" onclick="saveComment()">Submit</button>
 
 </section>
 
-<!-- CommentBox Script -->
-<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<section class="comment-feed" id="commentFeed">
+<!-- Comments load here -->
+</section>
 
 <script>
-commentBox('5646243388719104-proj');
+
+// Load existing comments on page load
+document.addEventListener("DOMContentLoaded", loadComments);
+
+function saveComment() {
+
+  let input = document.getElementById("commentInput");
+  let text = input.value.trim();
+
+  if(text === "") {
+    alert("Please enter a comment.");
+    return;
+  }
+
+  let comments = JSON.parse(localStorage.getItem("djSuiteComments")) || [];
+
+  let newComment = {
+    message: text,
+    date: new Date().toLocaleString(),
+    timestamp: Date.now()
+  };
+
+  comments.push(newComment);
+
+  localStorage.setItem("djSuiteComments", JSON.stringify(comments));
+
+  input.value = "";
+
+  loadComments();
+}
+
+function loadComments() {
+
+  let feed = document.getElementById("commentFeed");
+  feed.innerHTML = "";
+
+  let comments = JSON.parse(localStorage.getItem("djSuiteComments")) || [];
+
+  // Sort newest FIRST
+  comments.sort((a, b) => b.timestamp - a.timestamp);
+
+  comments.forEach(comment => {
+
+    let div = document.createElement("div");
+    div.className = "comment-item";
+
+    div.innerHTML = `
+      <div class="comment-date">${comment.date}</div>
+      <div>${comment.message}</div>
+    `;
+
+    feed.appendChild(div);
+  });
+
+}
+
 </script>
 
 </body>
